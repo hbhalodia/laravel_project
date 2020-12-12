@@ -27,11 +27,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+    /* if we use hidden not come in webpage */
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast to native types.
      *
