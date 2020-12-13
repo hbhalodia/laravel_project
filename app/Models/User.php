@@ -16,6 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    //protected $guarded = []; //if does'nt want fillable below;
     protected $fillable = [
         'name',
         'email',
@@ -40,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /* defining the mutators 
+    public function setPasswordAttribute($password){
+        $this->attributes['password']=bcrypt($password);
+    }
+    */
+    /*defining the accessor 
+    public function getNameAttribute($name){
+        return 'My name is : '.ucfirst($name);
+    }
+    */
+    
 }

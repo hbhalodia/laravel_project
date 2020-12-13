@@ -25,3 +25,7 @@ Route::get('/userHome', function () {
 
 Route::get('/user', [UserController::class, 'index']);      //--> IN laravel 8
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

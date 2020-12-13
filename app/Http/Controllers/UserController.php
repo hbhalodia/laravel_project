@@ -44,6 +44,22 @@ class UserController extends Controller
         
        // User::where('id',3)->delete();
         //return $user;
+
+        //Updating in Elequant Model
+        //User::where('id',7)->update(['name'=>'komal'],['email'=>'hitkumar@gmail.com']);
+        
+        //how to reduce create part from line 36-39 in one line 
+        $data = [
+            'name'=>'hitBro',
+            'email'=>'hitbro@mail.com',
+            'password'=> 'hitbro',
+        ];
+        //User::create($data);
+        
+        $user  =User::all();
+        return $user;
+
+        
         return view('home');
     }
 }
