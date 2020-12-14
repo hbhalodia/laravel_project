@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avtaar',
     ];
 
     /**
@@ -52,5 +53,17 @@ class User extends Authenticatable
         return 'My name is : '.ucfirst($name);
     }
     */
+
+    public static function uploadAvtaar($image){
+        $filename = $image->getClientOriginalName();
+        (new Self())->DeleteOldImage();    
+        $image->storeAs('images',$filename,'public');
+        auth()->user()->update(['avtaar'=>$filename]); 
+    }
     
+    protected function DeleteOldImage(){
+        if($this->avtaar){
+            Storage::delete('public/images/'.$this->avtaar);
+       }
+    }
 }

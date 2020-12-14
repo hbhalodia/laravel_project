@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;    //use in larvel 8 for user class else it will not come
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,12 @@ Route::get('/userHome', function () {
 //Route::get('/user','app\Http\Controllers\UserController@index');  --> In laravel 7 
 
 Route::get('/user', [UserController::class, 'index']);      //--> IN laravel 8
-
+Route::post('/upload',[UserController::class,'uploadAvtar']);
+//dd($request->all());
+    //dd($request->file('image')); //or 
+    //dd($request->image);
+    //to check if choosed image or not
+    //dd($request->hasfile('image'));
 
 Auth::routes();
 

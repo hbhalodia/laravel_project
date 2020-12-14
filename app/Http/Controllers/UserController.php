@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class UserController extends Controller
 {
+    public function uploadAvtar(Request $request){
+
+        if($request->hasfile('image')){
+            User::uploadAvtar($request->image);
+            //$filename = $request->image->getClientOriginalName();
+            //$this->DeleteOldImage();    
+            //$request->image->storeAs('images',$filename,'public');
+            // /auth()->user()->update(['avtaar'=>$filename]);  //the one who is logged in
+        }
+        //$request->image->store('images','public');        
+        return redirect()->back();
+    }
+    //protected function DeleteOldImage(){
+    //    if(auth()->user()->avtaar){
+    //        Storage::delete('public/images/'.auth()->user()->avtaar);
+    //    }
+    //}
     public function index(){
         //return 'I am in User Controller';
         //return view from controller
