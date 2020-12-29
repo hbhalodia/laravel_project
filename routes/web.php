@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;    //use in larvel 8 for user class else it will not come
+use App\Http\Controllers\TodoController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,16 @@ use App\Http\Controllers\UserController;    //use in larvel 8 for user class els
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*all routes for to-do list project */
+Route::get('/todos',[TodoController::class, 'index']);
+Route::get('/todos/create',[TodoController::class,'create']);
+Route::get('/todos/edit',[TodoController::class,'edit']);
+
+/*method post for form submit */
+Route::post('/todos/create',[TodoController::class,'store']);
+/*route for todo-list project complete*/
+
+
 Route::get('/', function () {
     return view('welcome');
 });
