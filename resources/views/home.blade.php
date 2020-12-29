@@ -18,6 +18,12 @@
                 </div>
 
                 <div class="card-body">
+                    <!--@include('layouts.flash-notification')-->
+                    <x-alert>
+                        <h1>Here is response from Upload </h1>
+                    </x-alert>
+
+                    <!--{{session()->forget('message')}}--> <!--To flush Session -->
                    <form action="/upload" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="image"/>

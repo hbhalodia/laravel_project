@@ -12,12 +12,17 @@ class UserController extends Controller
     public function uploadAvtar(Request $request){
 
         if($request->hasfile('image')){
-            User::uploadAvtar($request->image);
+            User::uploadAvtaar($request->image);
             //$filename = $request->image->getClientOriginalName();
             //$this->DeleteOldImage();    
             //$request->image->storeAs('images',$filename,'public');
             // /auth()->user()->update(['avtaar'=>$filename]);  //the one who is logged in
+            /*with help of Session helper we can put msg */
+            //session()->put('message','Image Uploaded.');
+            //$request->session()->flash('message','Image Is uploaded.');
+            return redirect()->back()->with('message','Image is Uploaded');
         }
+        $request->session()->flash('error','Image Is not uploaded.');
         //$request->image->store('images','public');        
         return redirect()->back();
     }

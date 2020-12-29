@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -56,14 +57,14 @@ class User extends Authenticatable
 
     public static function uploadAvtaar($image){
         $filename = $image->getClientOriginalName();
-        (new Self())->DeleteOldImage();    
+        (new Self)->DeleteOldImage();    
         $image->storeAs('images',$filename,'public');
         auth()->user()->update(['avtaar'=>$filename]); 
     }
     
     protected function DeleteOldImage(){
-        if($this->avtaar){
-            Storage::delete('public/images/'.$this->avtaar);
+        if(auth()->user()->avtaar){
+            Storage::delete('public/images/'.auth()->user()->avtaar);
        }
     }
 }
