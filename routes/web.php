@@ -15,12 +15,14 @@ use App\Http\Controllers\TodoController;
 |
 */
 /*all routes for to-do list project */
-Route::get('/todos',[TodoController::class, 'index']);
+Route::get('/todos',[TodoController::class, 'index'])->name('todo.index');
 Route::get('/todos/create',[TodoController::class,'create']);
-Route::get('/todos/edit',[TodoController::class,'edit']);
+Route::get('/todos/{todo}/edit',[TodoController::class,'edit']);
 
 /*method post for form submit */
 Route::post('/todos/create',[TodoController::class,'store']);
+//for updTE TODO list route
+Route::patch('/todos/{todo}/update',[TodoController::class,'update'])->name('todo.update');
 /*route for todo-list project complete*/
 
 

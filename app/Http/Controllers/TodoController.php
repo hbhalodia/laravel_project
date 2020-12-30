@@ -13,15 +13,20 @@ class TodoController extends Controller
 {
     //
     public function index(){
-        return view('todos.index');
+        $todos = Todo::orderBy('completed')->get();
+        //return view('todos.index')->with(['todos'=>$todos]);
+        //or
+        return view('todos.index',compact('todos'));
     }
 
     public function create(){
         return view('todos.create');
     }
 
-    public function edit(){
-        return view('todos.edittodolist');
+    public function edit(Todo $todo){
+        //$todo = Todo::find($id);  if directly passing id
+        //if passing the model from routeas route model binding
+        return view('todos.edittodolist',compact('todo'));
     }
 
     public function store(TodoCreateRequest $request){
@@ -50,7 +55,12 @@ class TodoController extends Controller
             'title' => 'required|max:255',
         ]);*/
         Todo::create($request->all());
-        return redirect()->back()->with('message','To do created succesfully');
+        return redirect(route('todo.index'))->with('message','To do created succesfully');
+    }
+
+    public function update(TodoCreateRequest $request , Todo $todo){
+        $todo -> update(['title' => $request->title]);
+        return redirect(route('todo.index'))->with('message','Todo Updated'); 
     }
 
 }
