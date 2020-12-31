@@ -18,6 +18,8 @@ class CreateTodosTable extends Migration
             $table->id();
             $table->string('title');
             $table->boolean('completed')->default(false);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

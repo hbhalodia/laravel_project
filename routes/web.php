@@ -15,14 +15,26 @@ use App\Http\Controllers\TodoController;
 |
 */
 /*all routes for to-do list project */
-Route::get('/todos',[TodoController::class, 'index'])->name('todo.index');
-Route::get('/todos/create',[TodoController::class,'create']);
-Route::get('/todos/{todo}/edit',[TodoController::class,'edit']);
+Route::middleware('auth')->group(function(){
+    Route::resource('/todo',TodoController::class);
+    Route::put('/todos/{todo}/complete',[TodoController::class,'complete'])->name('todo.complete');
+    Route::put('/todos/{todo}/incomplete',[TodoController::class,'incomplete'])->name('todo.incomplete');
+});
 
+/*
+Route::get('/todos',[TodoController::class, 'index'])->name('todo.index');
+Route::get('/todos/create',[TodoController::class,'create'])->name('todo.create');
+Route::get('/todos/{todo}/edit',[TodoController::class,'edit'])->name('todo.edit');
+*/
 /*method post for form submit */
-Route::post('/todos/create',[TodoController::class,'store']);
+//Route::post('/todos/create',[TodoController::class,'store'])->name('todo.store');
 //for updTE TODO list route
+/*
 Route::patch('/todos/{todo}/update',[TodoController::class,'update'])->name('todo.update');
+Route::put('/todos/{todo}/complete',[TodoController::class,'complete'])->name('todo.complete');
+Route::put('/todos/{todo}/incomplete',[TodoController::class,'incomplete'])->name('todo.incomplete');
+Route::delete('/todos/{todo}/delete',[TodoController::class,'destroy'])->name('todo.destroy');
+*/
 /*route for todo-list project complete*/
 
 

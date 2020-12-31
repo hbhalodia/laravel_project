@@ -54,7 +54,10 @@ class TodoController extends Controller
         $request->validate([
             'title' => 'required|max:255',
         ]);*/
-        Todo::create($request->all());
+
+        // Todo::create($request->all());
+        //after particular user has to create
+        auth()->user()->todos()->create($request->all());
         return redirect(route('todo.index'))->with('message','To do created succesfully');
     }
 
@@ -63,4 +66,16 @@ class TodoController extends Controller
         return redirect(route('todo.index'))->with('message','Todo Updated'); 
     }
 
+    public function complete(Todo $todo){
+        $todo->update(['completed' => true]);
+        return redirect()->back()->with('message','To do marked as completed!');
+    }
+    public function incomplete(Todo $todo){
+        $todo->update(['completed' => false]);
+        return redirect()->back()->with('message','To do marked as incompleted!');
+    }
+    public function destroy(Todo $todo){
+        $todo -> delete();
+        return redirect()->back()->with('message','To do Deleted!');
+    }
 }
