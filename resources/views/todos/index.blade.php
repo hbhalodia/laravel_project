@@ -10,16 +10,16 @@
     </div>
     <x-alert />
     <ul class="my-5">
-        @foreach ($todos as $todo)
+        @forelse($todos as $todo)
             <li class="flex justify-between p-3">
                 <div>
                     @include('todos.completeButton')  
                 </div>
 
                 @if($todo->completed)
-                    <p class="line-through">{{$todo->title}}</p>
+                    <a class="line-through">{{$todo->title}}</a>
                 @else
-                    <p>{{$todo->title}}</p>  
+                    <a class="cursor-pointer" href="{{route('todo.show',$todo->id)}}">{{$todo->title}}</a>  
                 @endif
                 
                 <div>
@@ -35,7 +35,9 @@
                         @method('delete')
                     </form> 
                 </div>     
-            </li>        
-        @endforeach
+            </li> 
+        @empty 
+            <p>No task Available , Create One </p>
+        @endforelse
     </ul>    
 @endsection

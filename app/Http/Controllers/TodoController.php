@@ -13,7 +13,9 @@ class TodoController extends Controller
 {
     //
     public function index(){
-        $todos = Todo::orderBy('completed')->get();
+        $todos = auth()->user()->todos()->orderBy('completed')->get(); //at sql level
+        //buy using collection -> $todos = auth()->user()->todos->sortBy('completed')->get();
+        //$todos = Todo::orderBy('completed')->get();
         //return view('todos.index')->with(['todos'=>$todos]);
         //or
         return view('todos.index',compact('todos'));
@@ -61,8 +63,12 @@ class TodoController extends Controller
         return redirect(route('todo.index'))->with('message','To do created succesfully');
     }
 
+    public function show(Todo $todo){
+        return view('todos.show',compact('todo'));
+    }
+
     public function update(TodoCreateRequest $request , Todo $todo){
-        $todo -> update(['title' => $request->title]);
+        $todo -> update(['title' => $request->title , 'description' => $request->description]);
         return redirect(route('todo.index'))->with('message','Todo Updated'); 
     }
 

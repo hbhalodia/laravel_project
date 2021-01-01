@@ -25,6 +25,7 @@ class TodoCreateRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
+            'description' =>'required',
         ];
     }
 
@@ -33,6 +34,7 @@ class TodoCreateRequest extends FormRequest
         return [
             'title.required' => 'A title is required',
             'title.max' => 'Todo Title should not greater than 255 characters',
+            'description.required' =>'A description is required',
         ];
     }
 }
