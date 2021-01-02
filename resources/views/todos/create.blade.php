@@ -18,12 +18,10 @@
             <div class="py-2">
                 <textarea name="description" rows="3" cols="22" placeholder="Description" class="py-2 px-2 rounded-lg border" id="" ></textarea>
             </div>
+            
             <div class="py-3">
-                <div class="flex justify-center pb-3 px-4">
-                    <h2 class="text-lg">Add Steps if Required</h2>
-                    <span class="fas fa-plus cursor-pointer px-3 py-1" />
-                </div>
-                <input type="text" name="step" placeholder="Describe Step" class="py-2 px-2 border rounded-lg"/>
+                @livewire('step')
+                
             </div>
             <div class="py-2">
                 <input type="submit" value="create" class="p-2 border rounded-lg" />
