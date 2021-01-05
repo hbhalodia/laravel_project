@@ -21,16 +21,13 @@ class TodoController extends Controller
         return view('todos.index',compact('todos'));
     }
 
+    public function show(Todo $todo){
+        return view('todos.show',compact('todo'));
+    }
+
     public function create(){
         return view('todos.create');
     }
-
-    public function edit(Todo $todo){
-        //$todo = Todo::find($id);  if directly passing id
-        //if passing the model from routeas route model binding
-        return view('todos.edittodolist',compact('todo'));
-    }
-
     public function store(TodoCreateRequest $request){
 
         /* not good below validation we need different logic for that */
@@ -68,8 +65,10 @@ class TodoController extends Controller
         return redirect(route('todo.index'))->with('message','To do created succesfully');
     }
 
-    public function show(Todo $todo){
-        return view('todos.show',compact('todo'));
+    public function edit(Todo $todo){
+        //$todo = Todo::find($id);  if directly passing id
+        //if passing the model from routeas route model binding
+        return view('todos.edittodolist',compact('todo'));
     }
 
     public function update(TodoCreateRequest $request , Todo $todo){
